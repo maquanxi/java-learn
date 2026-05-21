@@ -1,0 +1,4 @@
+{
+  "navigationBarTitleText": "智能测评",
+  "usingComponents": { "tag-select": "/components/tag-select/tag-select" }
+}

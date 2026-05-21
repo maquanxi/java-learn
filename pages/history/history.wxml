@@ -1,0 +1,58 @@
+<view class="page">
+  <view class="history-header">
+    <view class="history-title">历史记录</view>
+    <button class="clear-btn" bindtap="clear">清空全部</button>
+  </view>
+
+  <view class="history-tabs">
+    <view class="history-tab {{activeTab === 'assessment' ? 'active' : ''}}" bindtap="switchTab" data-tab="assessment">
+      测评记录 ({{assessments.length}})
+    </view>
+    <view class="history-tab {{activeTab === 'report' ? 'active' : ''}}" bindtap="switchTab" data-tab="report">
+      生成报告 ({{reports.length}})
+    </view>
+  </view>
+
+  <view class="history-content">
+    <block wx:if="{{activeTab === 'assessment'}}">
+      <view wx:for="{{assessments}}" wx:key="id" class="card record" data-index="{{index}}" bindtap="viewAssessment">
+        <view class="record-header">
+          <view class="record-title">{{item.identity}}｜{{item.grade}}</view>
+          <view class="record-time">{{item.createdAt}}</view>
+        </view>
+        <view class="record-info">
+          <view class="record-tag" wx:if="{{item.major}}">{{item.major}}</view>
+          <view class="record-tag" wx:if="{{item.region}}">{{item.region}}</view>
+        </view>
+        <view class="record-actions">
+          <button catchtap="deleteAssessment" data-index="{{index}}" class="delete-btn">删除</button>
+        </view>
+      </view>
+      <view wx:if="{{!assessments.length}}" class="empty-state">
+        <view class="empty-icon">📋</view>
+        <view class="empty-text">暂无测评记录</view>
+        <button class="ghost-btn" bindtap="goAssessment">去测评</button>
+      </view>
+    </block>
+
+    <block wx:if="{{activeTab === 'report'}}">
+      <view wx:for="{{reports}}" wx:key="id" class="card record" data-index="{{index}}" bindtap="viewReport">
+        <view class="record-header">
+          <view class="record-title">成长分析报告</view>
+          <view class="record-time">{{item.createdAt}}</view>
+        </view>
+        <view class="record-info">
+          <view class="record-tag" wx:if="{{item.identity}}">{{item.identity}}</view>
+        </view>
+        <view class="record-actions">
+          <button catchtap="deleteReport" data-index="{{index}}" class="delete-btn">删除</button>
+        </view>
+      </view>
+      <view wx:if="{{!reports.length}}" class="empty-state">
+        <view class="empty-icon">📊</view>
+        <view class="empty-text">暂无报告记录</view>
+        <button class="ghost-btn" bindtap="goAssessment">去生成报告</button>
+      </view>
+    </block>
+  </view>
+</view>

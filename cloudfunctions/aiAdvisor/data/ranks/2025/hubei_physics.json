@@ -1,0 +1,19 @@
+{
+  "province": "湖北",
+  "provinceCode": "hubei",
+  "year": 2025,
+  "category": "物理类",
+  "categoryCode": "physics",
+  "sourceName": "湖北省教育考试院/湖北省教育厅",
+  "sourceType": "官方高考分数段统计表",
+  "sourceUrl": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202506/P020250625730351882018.pdf",
+  "updatedAt": "2025-06-25",
+  "rows": [
+    { "score": 600, "sameScoreCount": 426, "cumulativeCount": 14274 },
+    { "score": 550, "sameScoreCount": 779, "cumulativeCount": 44422 },
+    { "score": 500, "sameScoreCount": 877, "cumulativeCount": 86678 },
+    { "score": 462, "sameScoreCount": 858, "cumulativeCount": 119769 },
+    { "score": 461, "sameScoreCount": 899, "cumulativeCount": 120668 },
+    { "score": 434, "sameScoreCount": 702, "cumulativeCount": 142516 }
+  ]
+}

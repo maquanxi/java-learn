@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "成长方案",
+  "usingComponents": {
+    "score-card": "/components/score-card/score-card",
+    "recommend-card": "/components/recommend-card/recommend-card",
+    "progress-bar": "/components/progress-bar/progress-bar"
+  }
+}

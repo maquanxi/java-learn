@@ -1,0 +1,18 @@
+<view class="loading-state" wx:if="{{loading}}">
+  <view class="loading-spinner">
+    <view class="spinner-dot"></view>
+    <view class="spinner-dot"></view>
+    <view class="spinner-dot"></view>
+  </view>
+  <view class="loading-text">{{text}}</view>
+</view>
+
+<view class="skeleton-state" wx:if="{{skeleton && !loading}}">
+  <view class="skeleton-item" wx:for="{{skeletonCount}}" wx:key="*this">
+    <view class="skeleton-avatar" wx:if="{{showAvatar}}"></view>
+    <view class="skeleton-content">
+      <view class="skeleton-title"></view>
+      <view class="skeleton-desc"></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+.privacy-hero{border-radius:28rpx;padding:36rpx;background:linear-gradient(135deg,#1677ff,#22c55e);color:#fff;margin-bottom:24rpx;box-shadow:0 16rpx 42rpx rgba(22,119,255,.16)}
+.privacy-title{font-size:44rpx;font-weight:900}
+.privacy-sub{font-size:26rpx;line-height:1.6;margin-top:12rpx;opacity:.94}
+.item{border-left:8rpx solid #1677ff}
+.item-title{font-size:30rpx;font-weight:900;color:#0f172a;margin-bottom:10rpx}
+.warning{background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1rpx solid #fed7aa}
+.gap{margin-top:18rpx}
+.danger-btn{height:80rpx;line-height:80rpx;border-radius:18rpx;color:#ef4444;background:#fee2e2;font-weight:800;font-size:28rpx}

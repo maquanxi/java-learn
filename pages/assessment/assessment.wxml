@@ -1,0 +1,141 @@
+<view class="page">
+  <view class="assessment-head">
+    <view class="head-kicker">快速测评</view>
+    <view class="head-title">{{currentConfig.title}}</view>
+    <view class="head-desc">{{currentConfig.desc}}</view>
+  </view>
+
+  <view class="card switch-card">
+    <view class="switch-label">选择身份</view>
+    <view class="identity-tabs">
+      <view wx:for="{{identityTabs}}" wx:key="name" class="identity-tab {{form.identity == item.name ? 'active' : ''}}" data-name="{{item.name}}" bindtap="onIdentityTap">
+        <text>{{item.name}}</text>
+        <view>{{item.desc}}</view>
+      </view>
+    </view>
+    <view class="switch-label theme-label">测评主题</view>
+    <view class="theme-tabs">
+      <view wx:for="{{planTabs}}" wx:key="key" class="theme-tab {{planType == item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="onThemeTap">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="step-card">
+    <view class="step-num">第 {{step + 1}} / {{totalSteps}} 步</view>
+    <view class="step-title">{{steps[step]}}</view>
+    <view class="step-progress">
+      <view class="step-progress-bar" style="width: {{(step + 1) / totalSteps * 100}}%"></view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{step == 0}}">
+    <block wx:if="{{planType == 'gaokao'}}">
+      <view class="field"><text>年级/阶段</text><input value="{{form.grade}}" bindinput="onInput" data-key="grade" placeholder="如:高三 / 已出分 / 复读评估" /></view>
+      <view class="field"><text>高考省份</text><input value="{{form.examProvince}}" bindinput="onInput" data-key="examProvince" placeholder="如:河南 / 湖北 / 广东" /></view>
+      <view class="field"><text>科类/选科</text><input value="{{form.subjectType}}" bindinput="onInput" data-key="subjectType" placeholder="如:物理类 / 历史类 / 理科 / 文科" /></view>
+      <view class="score-row">
+        <view class="field"><text>高考分数</text><input value="{{form.score}}" type="number" bindinput="onInput" data-key="score" placeholder="如:586" /></view>
+        <view class="field"><text>本省位次</text><input value="{{form.rank}}" type="number" bindinput="onInput" data-key="rank" placeholder="如:23680" /></view>
+      </view>
+      <view class="field"><text>所在地区</text><input value="{{form.region}}" bindinput="onInput" data-key="region" placeholder="如:河南郑州" /></view>
+    </block>
+
+    <block wx:elif="{{planType == 'competition'}}">
+      <view class="field"><text>年级</text><input value="{{form.grade}}" bindinput="onInput" data-key="grade" placeholder="如:大一 / 大二 / 大三" /></view>
+      <view class="field"><text>专业或团队背景</text><textarea value="{{form.major}}" bindinput="onInput" data-key="major" placeholder="如:软件工程 + 视觉设计 + 电商" auto-height maxlength="-1" /></view>
+      <view class="field"><text>已有项目基础</text><textarea value="{{form.projectExperience}}" bindinput="onInput" data-key="projectExperience" placeholder="如:有问卷 / 有小程序原型 / 还没有" auto-height maxlength="-1" /></view>
+      <view class="field"><text>可用资源</text><textarea value="{{form.resources}}" bindinput="onInput" data-key="resources" placeholder="如:指导老师、校内场景、公开数据、企业访谈" auto-height maxlength="-1" /></view>
+      <view class="field"><text>所在学校/地区</text><input value="{{form.region}}" bindinput="onInput" data-key="region" placeholder="如:湖北武汉某高校" /></view>
+    </block>
+
+    <block wx:elif="{{planType == 'growth'}}">
+      <view class="field"><text>年级</text><input value="{{form.grade}}" bindinput="onInput" data-key="grade" placeholder="如:大一 / 大二 / 大三" /></view>
+      <view class="field"><text>当前专业</text><input value="{{form.major}}" bindinput="onInput" data-key="major" placeholder="如:计算机类 / 教育技术学" /></view>
+      <view class="field"><text>已有经历</text><textarea value="{{form.projectExperience}}" bindinput="onInput" data-key="projectExperience" placeholder="如:课程项目、社团、科研、竞赛" auto-height maxlength="-1" /></view>
+      <view class="field"><text>主要困惑</text><textarea value="{{form.resources}}" bindinput="onInput" data-key="resources" placeholder="如:想考研但基础弱 / 不知道做什么项目" auto-height maxlength="-1" /></view>
+      <view class="field"><text>所在地区</text><input value="{{form.region}}" bindinput="onInput" data-key="region" placeholder="如:陕西西安" /></view>
+    </block>
+
+    <block wx:else>
+      <view class="field"><text>当前阶段</text><input value="{{form.grade}}" bindinput="onInput" data-key="grade" placeholder="如:应届生 / 往届生 / 转行准备" /></view>
+      <view class="field"><text>专业/学历背景</text><input value="{{form.major}}" bindinput="onInput" data-key="major" placeholder="如:软件工程本科 / 大专电子商务" /></view>
+      <view class="field"><text>目标城市</text><input value="{{form.region}}" bindinput="onInput" data-key="region" placeholder="如:杭州 / 成都 / 本地就业" /></view>
+      <view class="field"><text>已有技能</text><textarea value="{{form.skills}}" bindinput="onInput" data-key="skills" placeholder="如:Java、SQL、小程序、剪辑、运营" auto-height maxlength="-1" /></view>
+      <view class="field"><text>项目/实习经历</text><textarea value="{{form.projectExperience}}" bindinput="onInput" data-key="projectExperience" placeholder="如:课程项目2个 / 实习1段 / 暂无" auto-height maxlength="-1" /></view>
+    </block>
+  </view>
+
+  <view class="card" wx:if="{{step == 1}}">
+    <view class="card-hint">左右滑动查看更多方向，可多选；选择越清晰，后续推荐越贴近你的真实场景。</view>
+    <swiper class="interest-swiper" indicator-dots circular duration="360">
+      <swiper-item wx:for="{{interestGroups}}" wx:for-item="group" wx:key="title">
+        <view class="interest-page">
+          <view class="interest-head">
+            <view class="interest-title">{{group.title}}</view>
+            <view class="interest-desc">{{group.desc}}</view>
+          </view>
+          <tag-select options="{{group.options}}" value="{{form.interests}}" bind:change="onInterests"></tag-select>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view class="selected-box" wx:if="{{form.interests.length}}">
+      <view class="selected-title">已选方向</view>
+      <view class="selected-tags">
+        <text wx:for="{{form.interests}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{step == 2}}">
+    <view wx:for="{{abilityFields}}" wx:for-item="ability" wx:key="key" class="rate-row">
+      <text>{{ability.label}}</text>
+      <view class="rate-group">
+        <text wx:for="{{[1,2,3,4,5]}}" wx:for-item="score" wx:key="*this" class="rate {{form.abilities[ability.key] >= score ? 'on' : ''}}" data-key="{{ability.key}}" data-value="{{score}}" bindtap="setAbility">{{score}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{step == 3}}">
+    <view class="card-hint">目标会影响推荐逻辑，只显示当前测评主题内的目标。</view>
+    <tag-select options="{{goalOptions}}" value="{{form.goals}}" bind:change="onGoals"></tag-select>
+  </view>
+
+  <view class="card" wx:if="{{step == 4}}">
+    <block wx:if="{{planType == 'gaokao'}}">
+      <view class="field"><text>城市偏好</text><input value="{{form.preferences.city}}" bindinput="onPref" data-key="city" placeholder="如:省内优先 / 省会 / 沿海城市" /></view>
+      <view class="field"><text>专业取舍</text><input value="{{form.preferences.majorPriority}}" bindinput="onPref" data-key="majorPriority" placeholder="如:专业优先 / 学校优先 / 两者平衡" /></view>
+      <view class="field"><text>院校层次期待</text><input value="{{form.preferences.schoolPriority}}" bindinput="onPref" data-key="schoolPriority" placeholder="如:冲双一流 / 稳本科 / 保专业" /></view>
+      <view class="field"><text>风险接受度</text><input value="{{form.preferences.risk}}" bindinput="onPref" data-key="risk" placeholder="如:保守 / 平衡 / 愿意冲刺" /></view>
+      <view class="field"><text>家庭重点关注</text><input value="{{form.preferences.familyFocus}}" bindinput="onPref" data-key="familyFocus" placeholder="如:学费、距离、就业、转专业" /></view>
+    </block>
+
+    <block wx:elif="{{planType == 'competition'}}">
+      <view class="field"><text>目标赛事</text><input value="{{form.preferences.competition}}" bindinput="onPref" data-key="competition" placeholder="如:国创 / 挑战杯 / 互联网+" /></view>
+      <view class="field"><text>项目周期</text><input value="{{form.preferences.cycle}}" bindinput="onPref" data-key="cycle" placeholder="如:4周做原型 / 一学期申报" /></view>
+      <view class="field"><text>团队资源</text><input value="{{form.preferences.team}}" bindinput="onPref" data-key="team" placeholder="如:前端1人、调研2人、指导老师1位" /></view>
+      <view class="field"><text>数据或场景</text><input value="{{form.preferences.dataSource}}" bindinput="onPref" data-key="dataSource" placeholder="如:校园问卷、公开数据、合作单位" /></view>
+      <view class="field"><text>最想补强</text><input value="{{form.preferences.need}}" bindinput="onPref" data-key="need" placeholder="如:选题创新点 / 原型 / 申报书 / 路演" /></view>
+    </block>
+
+    <block wx:elif="{{planType == 'growth'}}">
+      <view class="field"><text>本学期时间</text><input value="{{form.preferences.weeklyTime}}" bindinput="onPref" data-key="weeklyTime" placeholder="如:每周8小时 / 周末集中" /></view>
+      <view class="field"><text>学习方式</text><input value="{{form.preferences.studyStyle}}" bindinput="onPref" data-key="studyStyle" placeholder="如:课程优先 / 项目驱动 / 考研复习" /></view>
+      <view class="field"><text>目标节点</text><input value="{{form.preferences.milestone}}" bindinput="onPref" data-key="milestone" placeholder="如:期末前做出作品 / 暑假开始复习" /></view>
+      <view class="field"><text>需要支持</text><input value="{{form.preferences.support}}" bindinput="onPref" data-key="support" placeholder="如:导师、队友、资料、实验室" /></view>
+    </block>
+
+    <block wx:else>
+      <view class="field"><text>城市偏好</text><input value="{{form.preferences.city}}" bindinput="onPref" data-key="city" placeholder="如:省会城市 / 一线城市 / 本地" /></view>
+      <view class="field"><text>稳定性偏好</text><picker range="{{levelOptions}}" bindchange="onPrefPick" data-key="stability"><view class="picker">{{form.preferences.stability || '请选择'}}</view></picker></view>
+      <view class="field"><text>薪资偏好</text><picker range="{{levelOptions}}" bindchange="onPrefPick" data-key="salary"><view class="picker">{{form.preferences.salary || '请选择'}}</view></picker></view>
+      <view class="field"><text>技术难度接受度</text><picker range="{{difficultyOptions}}" bindchange="onPrefPick" data-key="difficulty"><view class="picker">{{form.preferences.difficulty || '请选择'}}</view></picker></view>
+      <view class="field"><text>每周学习时间</text><input value="{{form.preferences.weeklyTime}}" bindinput="onPref" data-key="weeklyTime" placeholder="如:8 小时" /></view>
+    </block>
+  </view>
+
+  <view class="actions">
+    <button class="ghost-btn" wx:if="{{step > 0}}" bindtap="prev">上一步</button>
+    <button class="primary-btn" wx:if="{{step != totalSteps - 1}}" bindtap="next">下一步</button>
+    <button class="primary-btn" wx:else bindtap="submit">生成对应方案</button>
+  </view>
+  <view class="online-entry" bindtap="goAssistant">需要官方数据核验或继续追问，进入 AI 数据助手</view>
+</view>

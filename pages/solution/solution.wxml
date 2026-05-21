@@ -1,0 +1,57 @@
+<view class="page">
+  <block wx:if="{{solution}}">
+    <view class="solution-hero">
+      <image class="solution-img" src="{{images.campus}}" mode="aspectFill"></image>
+      <view class="solution-mask"></view>
+      <view class="solution-copy">
+        <view class="solution-kicker">{{solution.userData.planLabel || 'GROWTH PLAN'}}</view>
+        <view class="solution-title">{{meta.title}}</view>
+        <view class="solution-sub">{{meta.sub}}</view>
+      </view>
+    </view>
+    <score-card title="{{meta.scoreTitle}}" desc="根据当前测评主题生成" score="{{avgScore}}"></score-card>
+    <view class="card profile">
+      <view class="section-title">主题画像</view>
+      <progress-bar wx:for="{{profileBars}}" wx:key="label" label="{{item.label}}" value="{{item.value}}"></progress-bar>
+      <button class="ghost-btn" bindtap="goProfile">查看完整画像</button>
+    </view>
+
+    <block wx:if="{{showMajors}}">
+      <view class="section-title">{{meta.majorTitle}}</view>
+      <recommend-card wx:for="{{recommendations.majors}}" wx:key="id" item="{{item}}" bind:favorite="favorite"></recommend-card>
+    </block>
+
+    <block wx:if="{{showJobs}}">
+      <view class="section-title">{{meta.jobTitle}}</view>
+      <recommend-card wx:for="{{recommendations.jobs}}" wx:key="id" item="{{item}}" bind:favorite="favorite"></recommend-card>
+    </block>
+
+    <block wx:if="{{showProjects}}">
+      <view class="section-title">{{meta.projectTitle}}</view>
+      <recommend-card wx:for="{{recommendations.projects}}" wx:key="id" item="{{item}}" bind:favorite="favorite"></recommend-card>
+    </block>
+
+    <view class="card">
+      <view class="section-title">{{meta.pathTitle}}：{{recommendations.path.name}}</view>
+      <view class="path-item" wx:for="{{recommendations.path.stages}}" wx:key="*this">{{index + 1}}. {{item}}</view>
+      <view class="sub" wx:if="{{pathCoursesText}}">参考资料/课程：{{pathCoursesText}}</view>
+      <view class="sub" wx:if="{{pathProjectsText}}">输出材料：{{pathProjectsText}}</view>
+      <view class="sub" wx:if="{{recommendations.path.competitionAdvice}}">{{meta.tipLabel}}：{{recommendations.path.competitionAdvice}}</view>
+    </view>
+    <view class="solution-actions">
+      <view class="action-row">
+        <button class="primary-btn" bindtap="favoriteAll">收藏方案</button>
+        <button class="ghost-btn" bindtap="generateReport">生成报告</button>
+      </view>
+      <button class="ai-btn" bindtap="goAssistant">
+        <text class="ai-icon">AI</text> 使用数据助手深度分析
+      </button>
+      <button class="plain" bindtap="restart">返回重新测评</button>
+    </view>
+  </block>
+  <view wx:else class="empty card">
+    <view class="title">还没有成长方案</view>
+    <view class="sub">完成一次智能测评后，这里会按高考升学、竞赛选题或求职规划分别展示。</view>
+    <button class="primary-btn" bindtap="restart">去测评</button>
+  </view>
+</view>

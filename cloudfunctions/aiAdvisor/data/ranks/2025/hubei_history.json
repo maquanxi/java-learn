@@ -1,0 +1,18 @@
+{
+  "province": "湖北",
+  "provinceCode": "hubei",
+  "year": 2025,
+  "category": "历史类",
+  "categoryCode": "history",
+  "sourceName": "湖北省教育考试院/湖北省教育厅",
+  "sourceType": "官方高考分数段统计表",
+  "sourceUrl": "https://jyt.hubei.gov.cn/bmdt/ztzl/gxzs/zszy/zsfw/202506/P020250625730351260572.pdf",
+  "updatedAt": "2025-06-25",
+  "rows": [
+    { "score": 600, "sameScoreCount": 126, "cumulativeCount": 3166 },
+    { "score": 550, "sameScoreCount": 264, "cumulativeCount": 13647 },
+    { "score": 500, "sameScoreCount": 360, "cumulativeCount": 28838 },
+    { "score": 462, "sameScoreCount": 424, "cumulativeCount": 42830 },
+    { "score": 461, "sameScoreCount": 399, "cumulativeCount": 43229 }
+  ]
+}

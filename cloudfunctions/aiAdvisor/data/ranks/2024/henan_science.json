@@ -1,0 +1,19 @@
+{
+  "province": "河南",
+  "provinceCode": "henan",
+  "year": 2024,
+  "category": "理科",
+  "categoryCode": "science",
+  "sourceName": "河南省教育考试院",
+  "sourceType": "官方高考分数段统计表",
+  "sourceUrl": "https://www.haeea.cn/a/202406/43344_af412c0e.shtml",
+  "updatedAt": "2024-06-25",
+  "rows": [
+    { "score": 550, "sameScoreCount": 1257, "cumulativeCount": 73108 },
+    { "score": 500, "sameScoreCount": 1671, "cumulativeCount": 147838 },
+    { "score": 454, "sameScoreCount": 1810, "cumulativeCount": 226897 },
+    { "score": 453, "sameScoreCount": 1778, "cumulativeCount": 228675 },
+    { "score": 452, "sameScoreCount": 1762, "cumulativeCount": 230437 },
+    { "score": 434, "sameScoreCount": 1839, "cumulativeCount": 262825 }
+  ]
+}

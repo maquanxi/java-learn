@@ -1,0 +1,4 @@
+{
+  "navigationBarTitleText": "能力画像",
+  "usingComponents": { "progress-bar": "/components/progress-bar/progress-bar" }
+}

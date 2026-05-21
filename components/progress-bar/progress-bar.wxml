@@ -1,0 +1,7 @@
+<view class="progress-wrap">
+  <view class="row">
+    <text class="label">{{label}}</text>
+    <text class="value">{{value}}%</text>
+  </view>
+  <view class="track"><view class="fill" style="width: {{value}}%;"></view></view>
+</view>

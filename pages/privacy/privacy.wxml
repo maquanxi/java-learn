@@ -1,0 +1,20 @@
+<view class="page">
+  <view class="privacy-hero">
+    <view class="privacy-title">隐私说明</view>
+    <view class="privacy-sub">我们只收集生成规划报告所必需的信息，并提供本地清除和云端删除入口。</view>
+  </view>
+
+  <view class="card item" wx:for="{{items}}" wx:key="title">
+    <view class="item-title">{{item.title}}</view>
+    <view class="sub">{{item.desc}}</view>
+  </view>
+
+  <view class="card warning">
+    <view class="section-title">重要提示</view>
+    <view class="sub">本系统生成的专业、岗位、竞赛和 AI 建议仅供学习规划参考，不构成官方录取、就业或竞赛结果承诺。</view>
+  </view>
+
+  <button class="primary-btn" bindtap="accept">同意并继续使用</button>
+  <button class="ghost-btn gap" bindtap="clearLocal">清除本地数据</button>
+  <button class="danger-btn gap" bindtap="deleteCloud">删除云端个人数据</button>
+</view>

@@ -1,0 +1,19 @@
+<view class="page">
+  <view class="card">
+    <view class="title">{{meta.title}}</view>
+    <view class="sub">{{meta.desc}}</view>
+    <progress-bar wx:for="{{bars}}" wx:key="label" label="{{item.label}}" value="{{item.value}}"></progress-bar>
+  </view>
+  <view class="card">
+    <view class="section-title">优势分析</view>
+    <view class="list" wx:for="{{profile.strengths}}" wx:key="*this">• {{item}}</view>
+  </view>
+  <view class="card">
+    <view class="section-title">短板分析</view>
+    <view class="list" wx:for="{{profile.weaknesses}}" wx:key="*this">• {{item}}</view>
+  </view>
+  <view class="card">
+    <view class="section-title">提升建议</view>
+    <view class="list" wx:for="{{profile.advice}}" wx:key="*this">• {{item}}</view>
+  </view>
+</view>

@@ -1,0 +1,172 @@
+<view class="page advisor-page">
+  <view class="advisor-hero">
+    <image class="hero-image" src="{{images.advisor}}" mode="aspectFill"></image>
+    <view class="hero-mask"></view>
+    <view class="hero-copy">
+      <view class="hero-kicker">ONLINE DATA ADVISOR</view>
+      <view class="hero-title">AI 数据助手</view>
+      <view class="hero-sub">连接官方数据源，辅助分析志愿填报、国创选题和就业方向。</view>
+    </view>
+  </view>
+
+  <view class="mode-tabs">
+    <view wx:for="{{modes}}" wx:key="key" class="mode {{mode == item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="switchMode">{{item.label}}</view>
+  </view>
+
+  <!-- 表单区域 -->
+  <view class="form-section {{formCollapsed ? 'collapsed' : ''}}">
+    <view class="form-toggle" bindtap="toggleForm">
+      <text>{{formCollapsed ? '展开表单修改信息' : '收起表单'}}</text>
+      <text class="toggle-arrow">{{formCollapsed ? '▼' : '▲'}}</text>
+    </view>
+
+    <view wx:if="{{!formCollapsed}}" class="glass-card">
+      <block wx:if="{{mode == 'volunteer'}}">
+        <view class="mode-visual">
+          <image src="{{images.campus}}" mode="aspectFill"></image>
+          <view>
+            <view class="mode-title">志愿填报位次分析</view>
+            <view class="mode-desc">按本省一分一段表反查位次，再结合投档线做冲稳保。</view>
+          </view>
+        </view>
+        <view class="field-row">
+          <view class="field half">
+            <text>报考省份</text>
+            <picker range="{{provinces}}" bindchange="onProvince">
+              <view class="picker">{{form.province}}</view>
+            </picker>
+          </view>
+          <view class="field half">
+            <text>科类</text>
+            <picker range="{{subjectTypes}}" bindchange="onSubject">
+              <view class="picker">{{form.subjectType}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="field-row">
+          <view class="field half">
+            <text>高考分数</text>
+            <input value="{{form.score}}" type="number" data-key="score" bindinput="onInput" placeholder="如 586" />
+          </view>
+          <view class="field half">
+            <text>目标年份</text>
+            <picker range="{{yearOptions}}" bindchange="onYear">
+              <view class="picker">{{form.targetYear}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="rank-card">
+          <view>
+            <view class="rank-label">官方位次数据核验</view>
+            <view class="rank-value">{{autoRankText}}</view>
+          </view>
+          <view class="rank-actions">
+            <button class="rank-btn" loading="{{rankLoading}}" bindtap="queryRank">本地核验</button>
+            <button class="rank-secondary-btn" bindtap="toggleRankImport">{{rankImportOpen ? '收起导入' : '粘贴导入'}}</button>
+          </view>
+        </view>
+        <view wx:if="{{rankMissingText}}" class="rank-tip">{{rankMissingText}}</view>
+        <view wx:if="{{rankYears.length}}" class="rank-list">
+          <view wx:for="{{rankYears}}" wx:key="year" class="rank-row">
+            <view class="rank-main">
+              <view class="rank-year">{{item.year}} 年</view>
+              <view class="rank-meta">{{item.displayRank}}</view>
+              <view class="rank-meta">{{item.displayMeta}}</view>
+              <view wx:if="{{item.primarySource}}" class="rank-source" data-url="{{item.primarySource.url}}" bindtap="copyLink">
+                {{item.primarySource.title}}
+              </view>
+            </view>
+            <view class="rank-status {{item.status}}">{{item.statusText}}</view>
+          </view>
+        </view>
+        <view wx:if="{{rankImportOpen}}" class="rank-import-panel">
+          <view class="rank-import-title">导入官方一分一段表</view>
+          <view class="rank-import-desc">从省级教育考试院/招生考试院复制包含“分数、同分人数、累计人数/位次”的表格文本，粘贴后解析目标分数。</view>
+          <textarea class="data-input" value="{{admissionText}}" bindinput="onAdmissionText" placeholder="示例：&#10;423  1520  246810&#10;422  1498  248308"></textarea>
+          <button class="parse-btn primary-btn" bindtap="analyzeManualRank">解析粘贴数据</button>
+        </view>
+        <view class="field">
+          <text>兴趣/城市/专业偏好</text>
+          <input value="{{form.interests}}" data-key="interests" bindinput="onInput" placeholder="如 人工智能、软件工程、郑州/杭州" />
+        </view>
+      </block>
+
+      <block wx:elif="{{mode == 'project'}}">
+        <view class="mode-visual">
+          <image src="{{images.hero}}" mode="aspectFill"></image>
+          <view>
+            <view class="mode-title">选题比赛 AI 共创</view>
+            <view class="mode-desc">围绕国创、挑战杯、互联网+，生成选题、创新点和实施路线。</view>
+          </view>
+        </view>
+        <view class="field-row">
+          <view class="field half"><text>当前身份</text><input value="{{projectForm.identity}}" data-key="identity" bindinput="onProjectInput" placeholder="如 大学生" /></view>
+          <view class="field half"><text>年级/阶段</text><input value="{{projectForm.grade}}" data-key="grade" bindinput="onProjectInput" placeholder="如 大二" /></view>
+        </view>
+        <view class="field"><text>专业背景</text><input value="{{projectForm.major}}" data-key="major" bindinput="onProjectInput" placeholder="如 软件工程 / 数据科学" /></view>
+        <view class="field"><text>兴趣方向</text><input value="{{projectForm.interests}}" data-key="interests" bindinput="onProjectInput" placeholder="如 AI就业匹配、教育科技、农业环保" /></view>
+        <view class="field"><text>可用资源</text><input value="{{projectForm.resources}}" data-key="resources" bindinput="onProjectInput" placeholder="如 3人团队、有小程序基础、可做问卷" /></view>
+      </block>
+
+      <block wx:else>
+        <view class="mode-visual">
+          <image src="{{images.career}}" mode="aspectFill"></image>
+          <view>
+            <view class="mode-title">就业方向 AI 规划</view>
+            <view class="mode-desc">结合专业、技能、城市和岗位需求，生成求职路径。</view>
+          </view>
+        </view>
+        <view class="field-row">
+          <view class="field half"><text>学历/阶段</text><input value="{{careerForm.education}}" data-key="education" bindinput="onCareerInput" placeholder="如 本科应届" /></view>
+          <view class="field half"><text>目标城市</text><input value="{{careerForm.city}}" data-key="city" bindinput="onCareerInput" placeholder="如 武汉/杭州" /></view>
+        </view>
+        <view class="field"><text>专业与技能</text><input value="{{careerForm.skills}}" data-key="skills" bindinput="onCareerInput" placeholder="如 Java、Python、数据分析、小程序" /></view>
+        <view class="field"><text>目标岗位</text><input value="{{careerForm.interests}}" data-key="interests" bindinput="onCareerInput" placeholder="如 后端开发、数据分析、产品助理" /></view>
+        <view class="field"><text>求职偏好</text><input value="{{careerForm.preference}}" data-key="preference" bindinput="onCareerInput" placeholder="如 稳定、成长快、薪资优先" /></view>
+      </block>
+
+      <view class="button-row">
+        <button class="sync-btn" loading="{{loading}}" bindtap="syncSources">加载官方线索</button>
+        <button class="primary-btn" bindtap="analyze">开始分析</button>
+      </view>
+      <view wx:if="{{sourceGroups.length}}" class="source-panel inline-source-panel">
+        <view class="panel-title">官方来源线索</view>
+        <view wx:for="{{sourceGroups}}" wx:key="index" class="source-card">
+          <view class="source-head">
+            <view>
+              <view class="source-name">{{item.source.name}}</view>
+              <view class="source-url">{{item.source.url}}</view>
+            </view>
+            <view class="source-state {{item.statusClass}}">{{item.statusText}}</view>
+          </view>
+          <view class="source-note">{{item.message}}</view>
+          <view wx:for="{{item.links}}" wx:for-item="link" wx:key="url" class="link-line" data-url="{{link.url}}" bindtap="copyLink">{{link.title}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 聊天区域 -->
+  <view class="chat-area" style="padding-bottom: {{chatMessages.length ? '130rpx' : '0'}};">
+    <view wx:for="{{chatMessages}}" wx:key="index" class="chat-bubble-row {{item.role == 'user' ? 'user-row' : 'assistant-row'}}">
+      <view class="chat-avatar" wx:if="{{item.role == 'assistant'}}">智</view>
+      <view class="chat-bubble {{item.role == 'user' ? 'user-bubble' : 'assistant-bubble'}}">
+        <text>{{item.content}}</text>
+      </view>
+      <view class="chat-avatar user-avatar" wx:if="{{item.role == 'user'}}">我</view>
+    </view>
+    <view wx:if="{{aiLoading}}" class="chat-bubble-row assistant-row">
+      <view class="chat-avatar">智</view>
+      <view class="chat-bubble assistant-bubble loading-bubble">
+        <view class="search-status">正在结合官方线索和本地数据生成分析...</view>
+        <view class="typing-dots"><text></text><text></text><text></text></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 聊天输入栏 -->
+  <view wx:if="{{chatMessages.length}}" class="chat-input-bar">
+    <input class="chat-input" value="{{chatInput}}" bindinput="onChatInput" bindconfirm="sendChat" placeholder="继续追问..." confirm-type="send" />
+    <button class="chat-send-btn" bindtap="sendChat" disabled="{{!chatInput || aiLoading}}">发送</button>
+  </view>
+</view>

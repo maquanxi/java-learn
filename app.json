@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/assessment/assessment",
+    "pages/solution/solution",
+    "pages/profile/profile",
+    "pages/report/report",
+    "pages/history/history",
+    "pages/favorite/favorite",
+    "pages/assistant/assistant",
+    "pages/mine/mine",
+    "pages/about/about",
+    "pages/privacy/privacy"
+  ],
+  "window": {
+    "navigationBarTitleText": "学涯智航",
+    "navigationBarBackgroundColor": "#1677ff",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f6f8fb"
+  },
+  "tabBar": {
+    "color": "#64748b",
+    "selectedColor": "#1677ff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/assessment/assessment", "text": "测评" },
+      { "pagePath": "pages/solution/solution", "text": "方案" },
+      { "pagePath": "pages/mine/mine", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

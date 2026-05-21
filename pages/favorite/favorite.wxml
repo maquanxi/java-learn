@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="title">我的收藏</view>
+  <view class="sub intro">收藏的专业、岗位、国创选题和学习路径会展示在这里。</view>
+  <view wx:for="{{favorites}}" wx:key="id" class="card fav">
+    <view class="fav-title">{{item.name || item.title}}</view>
+    <view class="tags"><text class="tag">{{typeMap[item.type] || '方案'}}</text><text class="tag" wx:if="{{item.match}}">匹配 {{item.match}}%</text></view>
+    <view class="sub">{{item.reason || item.description || item.competitionAdvice}}</view>
+    <button data-id="{{item.id}}" data-type="{{item.type}}" bindtap="remove" class="remove">取消收藏</button>
+  </view>
+  <view wx:if="{{!favorites.length}}" class="empty card">暂无收藏方案</view>
+</view>

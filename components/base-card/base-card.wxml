@@ -1,0 +1,14 @@
+<view class="base-card {{customClass}}" bindtap="onTap">
+  <view class="card-header" wx:if="{{title}}">
+    <view class="card-title">{{title}}</view>
+    <view class="card-extra" wx:if="{{extra}}">
+      <slot name="extra"></slot>
+    </view>
+  </view>
+  <view class="card-body">
+    <slot></slot>
+  </view>
+  <view class="card-footer" wx:if="{{showFooter}}">
+    <slot name="footer"></slot>
+  </view>
+</view>

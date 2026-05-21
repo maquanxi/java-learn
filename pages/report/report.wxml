@@ -1,0 +1,31 @@
+<view class="page">
+  <block wx:if="{{report}}">
+    <view class="report-header">
+      <view class="report-badge">成长分析报告</view>
+      <view class="report-title">你的专属发展方案</view>
+      <view class="report-sub">{{report.createdAt || '基于测评结果生成'}}</view>
+    </view>
+
+    <view class="report-sections">
+      <report-section title="用户基础信息" content="{{baseInfo}}"></report-section>
+      <report-section title="{{meta.profileTitle}}" content="{{profileText}}"></report-section>
+      <report-section wx:if="{{showMajors}}" title="{{meta.majorTitle}}" content="{{majorText}}"></report-section>
+      <report-section wx:if="{{showJobs}}" title="{{meta.jobTitle}}" content="{{jobText}}"></report-section>
+      <report-section wx:if="{{showProjects}}" title="{{meta.projectTitle}}" content="{{projectText}}"></report-section>
+      <report-section title="{{meta.pathTitle}}" content="{{pathText}}"></report-section>
+      <report-section title="综合建议" content="{{adviceText}}"></report-section>
+    </view>
+
+    <view class="report-actions">
+      <view class="action-row">
+        <button class="primary-btn" bindtap="save">保存报告</button>
+        <button class="ghost-btn" bindtap="copy">复制文本</button>
+      </view>
+      <button class="plain" bindtap="home">返回首页</button>
+    </view>
+  </block>
+  <view wx:else class="card empty">
+    <view class="title">暂无报告</view>
+    <view class="sub">请先完成测评并生成完整报告。</view>
+  </view>
+</view>

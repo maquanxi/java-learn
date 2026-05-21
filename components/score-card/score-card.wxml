@@ -1,0 +1,7 @@
+<view class="score-card">
+  <view>
+    <view class="score-title">{{title}}</view>
+    <view class="score-desc">{{desc}}</view>
+  </view>
+  <view class="score-num">{{score}}%</view>
+</view>

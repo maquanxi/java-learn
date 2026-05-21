@@ -1,0 +1,25 @@
+.history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24rpx}
+.history-title{font-size:36rpx;font-weight:900;color:#0f172a}
+.clear-btn{width:140rpx;height:60rpx;line-height:60rpx;border-radius:14rpx;background:#fee2e2;color:#ef4444;font-size:24rpx;margin:0}
+
+.history-tabs{display:flex;gap:12rpx;margin-bottom:24rpx;background:#f1f5f9;border-radius:16rpx;padding:8rpx}
+.history-tab{flex:1;height:72rpx;line-height:72rpx;text-align:center;border-radius:12rpx;font-size:26rpx;font-weight:700;color:#64748b;transition:all 0.3s ease}
+.history-tab.active{background:#fff;color:#1677ff;box-shadow:0 4rpx 12rpx rgba(0,0,0,0.08)}
+
+.history-content{margin-bottom:24rpx}
+
+.record{position:relative;transition:all 0.3s ease}
+.record:active{transform:scale(0.98);opacity:0.9}
+.record-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12rpx}
+.record-title{font-size:30rpx;font-weight:800;color:#0f172a;flex:1}
+.record-time{font-size:22rpx;color:#94a3b8;flex-shrink:0;margin-left:16rpx}
+
+.record-info{display:flex;flex-wrap:wrap;gap:8rpx;margin-bottom:16rpx}
+.record-tag{display:inline-flex;align-items:center;padding:8rpx 16rpx;border-radius:8rpx;background:#f1f5f9;color:#64748b;font-size:22rpx}
+
+.record-actions{display:flex;justify-content:flex-end}
+.delete-btn{width:auto;height:56rpx;line-height:56rpx;padding:0 24rpx;border-radius:12rpx;background:#fee2e2;color:#ef4444;font-size:24rpx;margin:0}
+
+.empty-state{text-align:center;padding:60rpx 0;color:#94a3b8}
+.empty-icon{font-size:80rpx;margin-bottom:16rpx}
+.empty-text{font-size:28rpx;margin-bottom:24rpx}

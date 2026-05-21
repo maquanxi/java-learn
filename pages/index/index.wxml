@@ -1,0 +1,115 @@
+<view class="page">
+  <view class="hero">
+    <image class="hero-img" src="{{images.hero}}" mode="aspectFill"></image>
+    <view class="hero-mask"></view>
+    <view class="hero-content">
+      <view class="hero-badge">AI + 官方数据源</view>
+      <view class="hero-title">学涯智航</view>
+      <view class="hero-sub">让每一次选择，都有数据和智能辅助。</view>
+      <view class="hero-actions">
+        <button class="hero-btn" bindtap="startAssessment">快速测评</button>
+        <button class="hero-ai" bindtap="goAssistant">AI 数据助手</button>
+      </view>
+    </view>
+  </view>
+  <view class="service-strip">
+    <view wx:for="{{serviceCards}}" wx:key="key" class="service-item" data-key="{{item.key}}" bindtap="openService">
+      <text>{{item.title}}</text>
+      <view>{{item.desc}}</view>
+      <view class="service-arrow">查看</view>
+    </view>
+  </view>
+  <view class="section-title">选择你的身份</view>
+  <view class="identity-list">
+    <view wx:for="{{identities}}" wx:key="name" class="identity-card" data-name="{{item.name}}" bindtap="chooseIdentity">
+      <view class="identity-icon">{{item.icon}}</view>
+      <view class="identity-name">{{item.name}}</view>
+      <view class="identity-desc">{{item.desc}}</view>
+    </view>
+  </view>
+  <view class="section-title">热门方向</view>
+  <swiper class="hot-swiper" autoplay circular interval="3200" duration="420">
+    <swiper-item wx:for="{{hotGroups}}" wx:key="index">
+      <view class="hot-page">
+        <view wx:for="{{item}}" wx:for-item="hot" wx:key="*this" class="hot-item" data-name="{{hot}}" bindtap="openHot">{{hot}}</view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="online-card" bindtap="goAssistant">
+    <image class="online-img" src="{{images.advisor}}" mode="aspectFill"></image>
+    <view class="online-copy">
+      <view class="online-title">联网数据分析通道</view>
+      <view class="online-sub">连接省教育考试院、阳光高考和赛事/就业来源，基于真实位次和官方链接辅助判断。</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{lastReport}}">
+    <view class="row">
+      <view>
+        <view class="title">最近一次报告</view>
+        <view class="sub">{{lastReport.createdAt}}</view>
+      </view>
+      <button class="mini" bindtap="goReport">查看</button>
+    </view>
+  </view>
+
+  <view wx:if="{{serviceDetail}}" class="hot-mask" catchtap="closeService">
+    <view class="service-dialog" catchtap="noop">
+      <view class="dialog-head">
+        <view>
+          <view class="dialog-kicker">服务入口</view>
+          <view class="dialog-title">{{serviceDetail.title}}</view>
+        </view>
+        <view class="dialog-close" bindtap="closeService">×</view>
+      </view>
+      <view class="service-summary">{{serviceDetail.summary}}</view>
+      <view class="service-block">
+        <view class="dialog-label">核心判断</view>
+        <view class="service-list">
+          <view wx:for="{{serviceDetail.points}}" wx:key="*this">{{index + 1}}. {{item}}</view>
+        </view>
+      </view>
+      <view class="service-block">
+        <view class="dialog-label">最终产出</view>
+        <view class="dialog-tags service-tags">
+          <text wx:for="{{serviceDetail.outputs}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+      <view class="service-block">
+        <view class="dialog-label">建议提前准备</view>
+        <view class="dialog-tags service-tags">
+          <text wx:for="{{serviceDetail.prepare}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+      <button class="primary-btn dialog-btn" bindtap="startService">开始{{serviceDetail.title}}测评</button>
+    </view>
+  </view>
+
+  <view wx:if="{{hotDetail}}" class="hot-mask" catchtap="closeHot">
+    <view class="hot-dialog" catchtap="noop">
+      <view class="dialog-head">
+        <view>
+          <view class="dialog-kicker">方向助手</view>
+          <view class="dialog-title">{{hotDetail.name}}</view>
+        </view>
+        <view class="dialog-close" bindtap="closeHot">×</view>
+      </view>
+      <view class="dialog-block">
+        <view class="dialog-label">{{hotDetail.backgroundLabel || '背景'}}</view>
+        <view class="dialog-text">{{hotDetail.background}}</view>
+      </view>
+      <view class="dialog-block">
+        <view class="dialog-label">{{hotDetail.advantagesLabel || '优势'}}</view>
+        <view class="dialog-text">{{hotDetail.advantages}}</view>
+      </view>
+      <view class="dialog-block">
+        <view class="dialog-label">{{hotDetail.suitableLabel || '适合专业/场景'}}</view>
+        <view class="dialog-text">{{hotDetail.suitableMajors}}</view>
+      </view>
+      <view class="dialog-tags">
+        <text wx:for="{{hotDetail.roles}}" wx:key="*this">{{item}}</text>
+      </view>
+      <button class="primary-btn dialog-btn" bindtap="askHotAi">AI 助手深度介绍</button>
+    </view>
+  </view>
+</view>

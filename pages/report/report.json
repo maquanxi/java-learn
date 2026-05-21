@@ -1,0 +1,4 @@
+{
+  "navigationBarTitleText": "报告中心",
+  "usingComponents": { "report-section": "/components/report-section/report-section" }
+}

@@ -1,0 +1,20 @@
+<view class="rec-card">
+  <view class="rec-head">
+    <view class="rec-title">{{item.name || item.title}}</view>
+    <view class="match">{{item.match || 86}}%</view>
+  </view>
+  <view class="tags">
+    <text wx:for="{{item.tags}}" wx:key="*this" class="tag">{{item}}</text>
+  </view>
+  <view class="score-grid" wx:if="{{item.detailScores}}">
+    <view>兴趣 {{item.detailScores.interestScore}}</view>
+    <view>技能 {{item.detailScores.skillScore}}</view>
+    <view>目标 {{item.detailScores.goalScore}}</view>
+    <view>能力 {{item.detailScores.abilityScore}}</view>
+  </view>
+  <view class="line"><text class="label">推荐理由：</text>{{item.reason}}</view>
+  <view class="line"><text class="label">能力短板：</text>{{item.weakness}}</view>
+  <view class="line"><text class="label">下一步：</text>{{item.nextStep}}</view>
+  <view class="source" wx:if="{{item.sourceText}}">来源参考：{{item.sourceText}}</view>
+  <button class="small-btn" bindtap="onFavorite">收藏</button>
+</view>

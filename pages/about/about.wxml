@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="about-hero">
+    <view class="hero-mark">智</view>
+    <view class="about-title">学涯智航</view>
+    <view class="about-sub">陪你把升学、竞赛和求职选择想清楚、做扎实。</view>
+    <button class="hero-copy" bindtap="copyBrand">复制名称</button>
+  </view>
+
+  <view class="intro-card">
+    <view class="section-title">我们是谁</view>
+    <view class="intro-text">学涯智航是一款面向学生成长关键节点的智能规划服务。我们关注的不是把所有问题塞进同一套测评，而是把高考升学、大学竞赛、求职规划拆成不同场景，分别给出清晰、可核验、可执行的建议。</view>
+  </view>
+
+  <view class="section-title">我们服务什么</view>
+  <view class="service-list">
+    <view wx:for="{{services}}" wx:key="title" class="service-card">
+      <view class="service-title">{{item.title}}</view>
+      <view class="service-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">我们相信</view>
+    <view class="value-grid">
+      <view wx:for="{{values}}" wx:key="title" class="value-item">
+        <view class="value-title">{{item.title}}</view>
+        <view class="value-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">服务承诺</view>
+    <view class="promise-list">
+      <view wx:for="{{promises}}" wx:key="*this" class="promise-item">{{item}}</view>
+    </view>
+  </view>
+
+  <view class="contact-card">
+    <view class="section-title">{{from == 'feedback' ? '反馈建议' : '联系与合作'}}</view>
+    <view class="contact-row" wx:for="{{contacts}}" wx:key="label">
+      <view class="contact-label">{{item.label}}</view>
+      <view class="contact-value">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="card disclaimer-card">
+    <view class="section-title">免责声明</view>
+    <view class="sub">本系统生成的推荐结果仅作为学习规划、志愿参考、就业方向和项目选题辅助，不构成最终录取、就业或竞赛结果承诺。</view>
+  </view>
+</view>

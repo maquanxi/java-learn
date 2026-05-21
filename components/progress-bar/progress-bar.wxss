@@ -1,0 +1,6 @@
+.progress-wrap{margin:22rpx 0}
+.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12rpx}
+.label{font-size:26rpx;color:#334155;font-weight:600}
+.value{font-size:24rpx;color:#1677ff;font-weight:700}
+.track{height:18rpx;border-radius:999rpx;background:#e8eef7;overflow:hidden}
+.fill{height:18rpx;border-radius:999rpx;background:linear-gradient(90deg,#1677ff,#22c55e)}
